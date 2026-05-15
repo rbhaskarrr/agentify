@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Setup Guide — Community Publisher Agent | Agentify',
-  robots: { index: false }, // keep this page out of search engines
+  robots: { index: false },
 }
 
 const ENV_VARS = [
   { key: 'INSIDED_CLIENT_ID', where: 'Gainsight Community → Control Panel → Integrations → API', required: true },
-  { key: 'INSIDED_CLIENT_SECRET', where: 'Same page as above', required: true },
+  { key: 'INSIDED_CLIENT_SECRET', where: 'Same page (shown once on creation)', required: true },
   { key: 'INSIDED_REGION', where: 'e.g. https://api2-us-west-2.insided.com', required: true },
-  { key: 'INSIDED_AUTHOR_ID', where: 'Your community user ID (numeric, find in your profile URL)', required: true },
-  { key: 'ANTHROPIC_API_KEY', where: 'console.anthropic.com → API Keys (needed for AI generation only)', required: false },
+  { key: 'INSIDED_AUTHOR_ID', where: 'Numeric user ID — Control Panel → Users → check profile URL', required: true },
+  { key: 'ANTHROPIC_API_KEY', where: 'console.anthropic.com → API Keys (AI generation only)', required: false },
 ]
 
 export default function SetupPage() {
@@ -40,55 +40,75 @@ export default function SetupPage() {
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">1</div>
-            <h2 className="text-xl font-bold">Download your package</h2>
+            <h2 className="text-xl font-bold">Extract your download</h2>
           </div>
           <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6">
-            <p className="text-slate-300 text-sm mb-5">Check your email from Gumroad for the download link, or log in at gumroad.com to access your purchase at any time.</p>
-            <div className="bg-slate-800 rounded-xl p-4 font-mono text-sm text-slate-300 mb-4">
-              📦 community-publisher-agent.zip
+            <p className="text-slate-300 text-sm mb-4">Unzip the file you downloaded from Gumroad. You will see these files:</p>
+            <div className="bg-slate-800 rounded-xl p-4 font-mono text-sm text-slate-300 space-y-1">
+              <div>📄 server.js</div>
+              <div>📄 app.html</div>
+              <div>📄 package.json</div>
+              <div>📄 render.yaml</div>
+              <div>📄 .env.example</div>
+              <div>📄 README.md</div>
             </div>
-            <p className="text-slate-500 text-xs">Extract the ZIP — you will see two folders: <code className="bg-slate-800 px-1 rounded">server/</code> and <code className="bg-slate-800 px-1 rounded">widget/</code></p>
           </div>
         </div>
 
-        {/* Step 2 — Deploy server */}
+        {/* Step 2 — GitHub */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">2</div>
-            <h2 className="text-xl font-bold">Deploy the server to Render</h2>
+            <h2 className="text-xl font-bold">Push to a private GitHub repo</h2>
           </div>
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4">
-            <p className="text-slate-300 text-sm">The server folder contains a <code className="bg-slate-800 px-1 rounded">render.yaml</code> for one-click deploy. You have two options:</p>
-            <div className="space-y-3">
-              <div className="bg-slate-800 rounded-xl p-4">
-                <div className="text-sm font-semibold mb-1">Option A — One-click Render deploy (easiest)</div>
-                <p className="text-slate-400 text-xs mb-3">Push the server folder to a new GitHub repo, then click the button below from your repo&apos;s README.</p>
-                <div className="bg-slate-700 rounded-lg px-4 py-2 font-mono text-xs text-purple-300">
-                  [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)]
-                </div>
-              </div>
-              <div className="bg-slate-800 rounded-xl p-4">
-                <div className="text-sm font-semibold mb-1">Option B — Manual deploy</div>
-                <ol className="text-slate-400 text-xs space-y-1 list-decimal list-inside">
-                  <li>Go to render.com → New → Web Service</li>
-                  <li>Connect your GitHub repo (server folder)</li>
-                  <li>Build command: <code className="bg-slate-700 px-1 rounded">npm install</code></li>
-                  <li>Start command: <code className="bg-slate-700 px-1 rounded">node server.js</code></li>
-                  <li>Plan: Free</li>
-                </ol>
-              </div>
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-3">
+            <p className="text-slate-300 text-sm">Create a new <strong>private</strong> repo on GitHub and push all the extracted files into it. Render will pull from this repo.</p>
+            <div className="bg-slate-800 rounded-xl p-4 space-y-2 font-mono text-xs text-slate-300">
+              <div><span className="text-slate-500"># from inside the extracted folder</span></div>
+              <div>git init</div>
+              <div>git add .</div>
+              <div>git commit -m &quot;initial&quot;</div>
+              <div>git remote add origin https://github.com/YOUR_USER/YOUR_REPO</div>
+              <div>git push -u origin main</div>
             </div>
           </div>
         </div>
 
-        {/* Step 3 — Environment Variables */}
+        {/* Step 3 — Deploy */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">3</div>
+            <h2 className="text-xl font-bold">Deploy to Render (free)</h2>
+          </div>
+          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4">
+            <div className="bg-slate-800 rounded-xl p-4">
+              <div className="text-sm font-semibold mb-2">Option A — Manual (2 minutes)</div>
+              <ol className="text-slate-400 text-xs space-y-1.5 list-decimal list-inside">
+                <li>Go to <strong className="text-slate-300">render.com</strong> → <strong className="text-slate-300">New → Web Service</strong></li>
+                <li>Click <strong className="text-slate-300">Connect GitHub</strong> and select your repo</li>
+                <li>Build command: <code className="bg-slate-700 px-1 rounded">npm install</code></li>
+                <li>Start command: <code className="bg-slate-700 px-1 rounded">node server.js</code></li>
+                <li>Plan: <strong className="text-slate-300">Free</strong> → click <strong className="text-slate-300">Create Web Service</strong></li>
+              </ol>
+            </div>
+            <div className="bg-slate-800 rounded-xl p-4">
+              <div className="text-sm font-semibold mb-2">Option B — One-click button</div>
+              <p className="text-slate-400 text-xs">The README.md in your package includes a Deploy to Render button. Open the README on GitHub and click it.</p>
+            </div>
+            <div className="bg-amber-900/20 border border-amber-700/40 rounded-xl p-4 text-amber-300 text-xs">
+              ⚠️ Render free tier spins down after 15 min of inactivity. First request may take ~30 seconds to wake. Upgrade to a paid plan ($7/mo) if your team needs it always-on.
+            </div>
+          </div>
+        </div>
+
+        {/* Step 4 — Environment Variables */}
+        <div className="mb-10">
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">4</div>
             <h2 className="text-xl font-bold">Add environment variables in Render</h2>
           </div>
           <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6">
-            <p className="text-slate-300 text-sm mb-5">In your Render service → <strong>Environment</strong> tab, add these variables:</p>
+            <p className="text-slate-300 text-sm mb-5">In your Render service → <strong>Environment</strong> tab, add these variables and click <strong>Save Changes</strong>:</p>
             <div className="space-y-3">
               {ENV_VARS.map(v => (
                 <div key={v.key} className="bg-slate-800 rounded-xl p-4">
@@ -102,47 +122,28 @@ export default function SetupPage() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Step 4 — Gainsight Connector */}
-        <div className="mb-10">
-          <div className="flex items-center gap-3 mb-5">
-            <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">4</div>
-            <h2 className="text-xl font-bold">Create the Gainsight connector</h2>
-          </div>
-          <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4">
-            <ol className="text-slate-300 text-sm space-y-3 list-decimal list-inside">
-              <li>Go to <strong>Gainsight Community → Control Panel → Integrations → Connectors</strong></li>
-              <li>Click <strong>New Connector</strong></li>
-              <li>Name: <code className="bg-slate-800 px-1 rounded text-purple-300">community-publisher</code></li>
-              <li>Endpoint URL: <code className="bg-slate-800 px-1 rounded text-purple-300">https://YOUR-APP.onrender.com/widget</code></li>
-              <li>Method: <strong>POST</strong></li>
-              <li>Save</li>
-            </ol>
-            <div className="bg-amber-900/20 border border-amber-700/40 rounded-xl p-4 text-amber-300 text-xs">
-              ⚠️ Replace <code>YOUR-APP</code> with your actual Render service name (visible in the Render dashboard URL).
+            <div className="mt-4 bg-blue-900/20 border border-blue-700/40 rounded-xl p-4 text-blue-300 text-xs">
+              💡 After saving, Render will redeploy automatically. Wait ~1 minute for the new deploy to finish.
             </div>
           </div>
         </div>
 
-        {/* Step 5 — Install widget */}
+        {/* Step 5 — Use it */}
         <div className="mb-10">
           <div className="flex items-center gap-3 mb-5">
             <div className="w-9 h-9 rounded-full bg-purple-700 flex items-center justify-center font-bold flex-shrink-0">5</div>
-            <h2 className="text-xl font-bold">Install the widget in your community</h2>
+            <h2 className="text-xl font-bold">Open your app and connect</h2>
           </div>
           <div className="bg-slate-900 border border-slate-700 rounded-2xl p-6 space-y-4">
             <ol className="text-slate-300 text-sm space-y-3 list-decimal list-inside">
-              <li>In your Gainsight Community admin, go to <strong>Control Panel → Pages</strong></li>
-              <li>Create a new <strong>Custom Page</strong> (e.g. &quot;Community Publisher&quot;) — set visibility to <strong>Moderators only</strong></li>
-              <li>Click <strong>Edit Layout</strong></li>
-              <li>In the widget library, find <strong>Custom Widgets → Community Publisher</strong></li>
-              <li>Drag it onto the page and save</li>
-              <li>Visit the page — the widget will load and prompt for configuration on first launch</li>
+              <li>Go to <code className="bg-slate-800 px-1 rounded text-purple-300">https://YOUR-SERVICE.onrender.com</code></li>
+              <li>Select your <strong>API Region</strong> (e.g. US West 2)</li>
+              <li>Enter your <strong>Client ID</strong>, <strong>Client Secret</strong>, and <strong>Author ID</strong></li>
+              <li>Click <strong>Connect & Authenticate</strong></li>
+              <li>You are in! Write, translate, and publish articles directly from the app.</li>
             </ol>
             <div className="bg-slate-800 rounded-xl p-4 text-xs text-slate-400">
-              <strong className="text-slate-300">Widget source files</strong> are in the <code>widget/</code> folder of your download. Upload them to your Gainsight Extensions Source (GitHub repo or zip upload) as per the Gainsight Custom Widget docs.
+              <strong className="text-slate-300">Tip:</strong> Bookmark the Render URL for your team. Anyone who needs to publish articles can use it — just enter the credentials on the Connect screen.
             </div>
           </div>
         </div>
@@ -151,7 +152,7 @@ export default function SetupPage() {
         <div className="bg-gradient-to-br from-purple-900/50 to-indigo-900/50 border border-purple-700/40 rounded-2xl p-8 text-center">
           <div className="text-4xl mb-3">🚀</div>
           <h2 className="text-2xl font-bold mb-2">You&apos;re all set!</h2>
-          <p className="text-slate-300 text-sm mb-6">Your team can now write, translate into 8 languages, and publish articles directly from inside the community.</p>
+          <p className="text-slate-300 text-sm mb-6">Your team can now write, translate into 8 languages, and publish articles directly from the web app — no code needed.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <a href="/agents/community-publisher" className="bg-purple-700 hover:bg-purple-600 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
               ← Back to agent page
