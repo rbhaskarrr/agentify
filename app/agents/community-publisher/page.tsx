@@ -1,7 +1,6 @@
 'use client'
 
-// ── Replace this URL with your actual Gumroad product link after creating it on gumroad.com
-const GUMROAD_URL = 'https://agentify.gumroad.com/l/community-publisher'
+const GUMROAD_URL = 'https://rohitbhaskar.gumroad.com/l/mikgcm'
 const PRICE = '$29'
 
 const FEATURES = [
