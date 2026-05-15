@@ -216,8 +216,8 @@ export default function Home() {
                   ))}
                 </ul>
                 {agent.status === 'live' ? (
-                  <a href="#pricing" className="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
-                    Install Agent →
+                  <a href="/agents/community-publisher" className="inline-flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+                    View & Install →
                   </a>
                 ) : (
                   <a href="#waitlist" className="inline-flex items-center gap-2 border border-slate-300 hover:border-purple-400 hover:text-purple-700 text-slate-600 text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
