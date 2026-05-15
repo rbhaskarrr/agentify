@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
+const basePath = process.env.NEXT_BASE_PATH || '';
+
 const nextConfig = {
   output: 'export',
   images: { unoptimized: true },
+  basePath,
+  assetPrefix: basePath,
 };
 
 export default nextConfig;
