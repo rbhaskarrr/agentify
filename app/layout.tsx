@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://agentify.pages.dev',
   },
+  verification: {
+    google: 'QjzM5dI_AnHQk8SEugz4nFO_m06T85weHhKaBSU6VO8',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
