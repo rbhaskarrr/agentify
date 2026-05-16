@@ -6,12 +6,22 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Agentify — AI Agents for Community Teams',
-  description: 'AI agents that write, translate into 8 languages, and publish content for your Gainsight Community. No code required. Free to start.',
+  title: 'Agentify — AI Agents for Gainsight Community Teams',
+  description: 'AI agents that write, translate into 8 languages, and publish content for your Gainsight Community. No code required. Deploy in 10 minutes.',
+  keywords: 'Gainsight Community, inSided, community publishing, AI agent, article translation, community manager tools',
   openGraph: {
-    title: 'Agentify — AI Agents for Community Teams',
-    description: 'Put your community on autopilot with AI agents built for Gainsight Community.',
+    title: 'Agentify — AI Agents for Gainsight Community Teams',
+    description: 'Write, translate into 8 languages, and publish articles directly to your Gainsight Community. No code required.',
     type: 'website',
+    url: 'https://agentify.pages.dev',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Agentify — AI Agents for Gainsight Community Teams',
+    description: 'Write, translate into 8 languages, and publish articles directly to your Gainsight Community.',
+  },
+  alternates: {
+    canonical: 'https://agentify.pages.dev',
   },
 }
 
