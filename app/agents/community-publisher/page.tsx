@@ -1,7 +1,7 @@
 'use client'
 
 const GUMROAD_URL = 'https://rohitbhaskar.gumroad.com/l/mikgcm'
-const PRICE = '$20'
+const PRICE = '$5'
 
 const FEATURES = [
   { icon: '✦', title: 'AI Article Generation', desc: 'Generate full articles from a topic or any public URL using Claude AI.' },
