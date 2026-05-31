@@ -1,6 +1,6 @@
 'use client'
 
-const GUMROAD_URL = 'https://rohitbhaskar.gumroad.com/l/mikgcm'
+const GUMROAD_URL = 'https://agentifyy.gumroad.com/l/mikgcm'
 const PRICE = '$5'
 
 const FEATURES = [

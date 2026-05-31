@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 
-const GUMROAD_URL = 'https://rohitbhaskar.gumroad.com/l/mikgcm'
+const GUMROAD_URL = 'https://agentifyy.gumroad.com/l/mikgcm'
 
 const AGENTS = [
   {
